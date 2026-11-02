@@ -25,3 +25,14 @@ export function updateInvoice(
 
   return invoice;
 }
+
+export function findInvoice(
+  idOrClientName: number | string,
+): Invoice | undefined {
+  if (typeof idOrClientName === "number") {
+    return invoiceStore.find((invoice) => invoice.id === idOrClientName);
+  }
+  return invoiceStore.find(
+    (inv) => inv.client.name.toLowerCase() === idOrClientName.toLowerCase(),
+  );
+}

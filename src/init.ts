@@ -1,7 +1,11 @@
 import type { Invoice, LineItem } from "./types/invoice.js";
 import type { Client } from "./types/client.js";
 import type { Address } from "./types/address.js";
-import { createInvoice, updateInvoice } from "./services/invoiceService.js";
+import {
+  createInvoice,
+  findInvoice,
+  updateInvoice,
+} from "./services/invoiceService.js";
 
 const bizAddress: Address = {
   street:
@@ -57,6 +61,10 @@ console.log("New Web design invoice: ", newWebDesignInv);
 
 const test = updateInvoice(99, {});
 console.log("Test: ", test);
+
+console.log("Find Invoice by ID:", findInvoice(2));
+console.log("Find Invoice by Name:", findInvoice("jeff teague"));
+console.log("Find Invoice by Name:", findInvoice("Nobody"));
 
 // console.log(`Buisness: `, bizClient);
 // console.log(`Individual: `, indiClient);
