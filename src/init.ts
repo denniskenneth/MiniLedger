@@ -7,6 +7,7 @@ import {
   invoiceTotals,
   updateInvoice,
 } from "./services/invoiceService.js";
+import { printInvoice } from "./cli/printInvoice.js";
 
 const bizAddress: Address = {
   street:
@@ -54,22 +55,7 @@ const foodInv = createInvoice({
   dueDate: new Date("2027-03-25"),
 });
 
-console.log("Web design invoice: ", webDesignInv);
-console.log("Food invoice: ", foodInv);
-
-const newWebDesignInv = updateInvoice(1, { status: "sent" });
-console.log("New Web design invoice: ", newWebDesignInv);
-
-const test = updateInvoice(99, {});
-console.log("Test: ", test);
-
-console.log("Find Invoice by ID:", findInvoice(2));
-console.log("Find Invoice by Name:", findInvoice("jeff teague"));
-console.log("Find Invoice by Name:", findInvoice("Nobody"));
-
-console.log("Totals:", invoiceTotals(foodInv));
-
-// console.log(`Buisness: `, bizClient);
-// console.log(`Individual: `, indiClient);
+printInvoice(webDesignInv);
+printInvoice(foodInv);
 
 console.log("miniledger up");
