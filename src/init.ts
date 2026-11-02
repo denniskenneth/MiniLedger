@@ -4,6 +4,7 @@ import type { Address } from "./types/address.js";
 import {
   createInvoice,
   findInvoice,
+  invoiceTotals,
   updateInvoice,
 } from "./services/invoiceService.js";
 
@@ -65,6 +66,8 @@ console.log("Test: ", test);
 console.log("Find Invoice by ID:", findInvoice(2));
 console.log("Find Invoice by Name:", findInvoice("jeff teague"));
 console.log("Find Invoice by Name:", findInvoice("Nobody"));
+
+console.log("Totals:", invoiceTotals(foodInv));
 
 // console.log(`Buisness: `, bizClient);
 // console.log(`Individual: `, indiClient);

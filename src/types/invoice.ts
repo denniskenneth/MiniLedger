@@ -24,4 +24,10 @@ type NewInvoice = Omit<Invoice, "id" | "status" | "issuedDate">;
 
 type InvoiceUpdate = Partial<Omit<Invoice, "id">>;
 
-export type { LineItem, Invoice, NewInvoice, InvoiceUpdate };
+type InvoiceTotals = {
+  subtotal: number;
+  vat: number;
+  total: number;
+};
+
+export type { LineItem, Invoice, NewInvoice, InvoiceUpdate, InvoiceTotals };

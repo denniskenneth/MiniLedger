@@ -1,4 +1,11 @@
-import type { Invoice, InvoiceUpdate, NewInvoice } from "../types/invoice.js";
+import { VAT_RATE } from "../config.js";
+import type {
+  Invoice,
+  InvoiceTotals,
+  InvoiceUpdate,
+  LineItem,
+  NewInvoice,
+} from "../types/invoice.js";
 
 let nextId: number = 1;
 const invoiceStore: Invoice[] = [];
@@ -35,4 +42,26 @@ export function findInvoice(
   return invoiceStore.find(
     (inv) => inv.client.name.toLowerCase() === idOrClientName.toLowerCase(),
   );
+}
+
+export function lineItemTotal(lineItem: LineItem): number {
+  return Math.round(lineItem.quantity * lineItem.unitPriceInMinorUnit);
+}
+
+export function invoiceSubtotal(inv: Invoice): number {
+  return inv.items.reduce(
+    (runningTotal, currentItem) => runningTotal + lineItemTotal(currentItem),
+    0,
+  );
+}
+
+export function invoiceTotals(inv: Invoice): InvoiceTotals {
+  const subtotal = invoiceSubtotal(inv);
+  const vat = Math.round(subtotal * VAT_RATE);
+  const total = subtotal + vat;
+  return {
+    subtotal,
+    vat,
+    total,
+  };
 }
